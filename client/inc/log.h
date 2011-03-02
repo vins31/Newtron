@@ -21,6 +21,12 @@
 #ifndef __DEF_LOG
 #define __DEF_LOG
 
+/**
+ * @file log.h
+ * \brief Logging class file.
+ * Logging class file (will be used everywhere in Newtron to log stuff).
+ */
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -29,17 +35,49 @@ using namespace std;
 
 #define DEFAULT_LOG_PATH "newtron_log.log"
 
+/**
+ * \enum Log Types
+ * The different log types (used with the write function to affect output).
+ */
 enum Log_Type {
-    LOG_ERROR,LOG_NORMAL,LOG_NETWORK,LOG_3D
+    LOG_ERROR, 
+    LOG_NORMAL,
+    LOG_NETWORK,
+    LOG_3D
 };
 
+
+/**
+ * \class Newtron's logging class.
+ */
 class Log{
 public:
+    /** \brief Default constructor.
+     */
     Log();
+
+    /** \brief Destructor. 
+     * Class destructor. Will close the file if no call to Log::close has been done.
+     */
     ~Log();
+
+    /** \brief Init function.
+     * To be called at the beginning of Newtron's execution.
+     * \param file_path Optional parameter to set a new log file path.
+     */
     void init(string file_path=DEFAULT_LOG_PATH);
+
+    /** \brief Write function.
+     * Returns a fstream-type flow to use as a "cout" one to write in the logging file.
+     * \param type Optional log's type (if void, it will be considered as LOG_NORMAL)
+     * \return The file stream to write on (to be used as a normal fstream)
+     */
     fstream &write(Log_Type type=LOG_NORMAL);
+
+    /** \brief Closes the logging class.
+     */
     void close();
+
 private:
     string logtype_to_prefix(Log_Type type);
     fstream m_file;
