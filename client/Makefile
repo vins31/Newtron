@@ -1,18 +1,19 @@
 # output executable name
 EXEC = test
 # source files
-CC = g++
-CXXFLAGS = 
+CXX = g++
+CXXFLAGS = -W -Wall -Iinc/
 LDFLAGS = 
-SRCS = $(wildcard *.cpp)
+SRCS = $(wildcard src/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(EXEC)
 
 $(EXEC) : $(OBJS)
-	$(CC) -o $@ $^ $(LDFLAGS)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
 %.o : %.cpp
-	$(CC) -o $@ -c $< $(CXXFLAGS)
+	$(CXX) -o $@ -c $< $(CXXFLAGS)
+
 clean:
 	rm -rf $(OBJS)

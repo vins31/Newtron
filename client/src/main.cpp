@@ -19,8 +19,11 @@
 */
 
 #include <iostream>
+#include "log.h"
+
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello, world!\n";
+    cout << "Hello, world!\n" <<endl;
 }
