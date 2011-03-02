@@ -1,5 +1,5 @@
 /*
-    Newtron
+    Newtron - Logging class file
     Copyright © 2011 Rémi Palandri, Vincent A., Guillaume Babin
     This file is part of Newtron.
 
@@ -20,13 +20,13 @@
 
 #include "log.h"
 
-Log::Log() : m_log_type(LOG_NORMAL) 
+Log::Log() : m_log_type(LOG_INFO) 
 {
 }
 
 Log::~Log() {
     if(m_file) {
-        write(LOG_NORMAL);
+        write(LOG_INFO);
         m_file.close();
     }
 }
@@ -54,17 +54,14 @@ void Log::close() {
 string Log::logtype_to_prefix(Log_Type type) {
     string prefix="";
     switch (type) {
+    case LOG_INFO:
+        prefix="[INF]";
+        break;
+    case LOG_WARNING:
+        prefix="[WAR]";
+        break;
     case LOG_ERROR:
-        prefix="(ERR)";
-        break;
-    case LOG_NORMAL:
-        prefix="()";
-        break;
-    case LOG_NETWORK:
-        prefix="(NET)";
-        break;
-    case LOG_3D:
-        prefix="(OGR)";
+        prefix="[ERR]";
         break;
     }
     return prefix;

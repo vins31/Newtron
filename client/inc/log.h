@@ -1,5 +1,5 @@
 /*
-    Newtron
+    Newtron - Logging class file
     Copyright © 2011 Rémi Palandri, Vincent A., Guillaume Babin
     This file is part of Newtron.
 
@@ -30,7 +30,7 @@
 /* Example : 
  Log log;
  log.init();
- log.write(LOG_3D)<<"Ogre initialisation"<<endl;
+ log.write(LOG_INFO)<<"Ogre initialisation"<<endl;
  log.close();
 */
 
@@ -47,10 +47,9 @@ using namespace std;
  * The different log types (used with the write function to affect output).
  */
 enum Log_Type {
-    LOG_ERROR, 
-    LOG_NORMAL,
-    LOG_NETWORK,
-    LOG_3D
+    LOG_INFO, 
+    LOG_WARNING,
+    LOG_ERROR
 };
 
 
@@ -79,7 +78,7 @@ public:
      * \param type Optional log's type (if void, it will be considered as LOG_NORMAL)
      * \return The file stream to write on (to be used as a normal fstream)
      */
-    fstream &write(Log_Type type=LOG_NORMAL);
+    fstream &write(Log_Type type=LOG_INFO);
 
     /** \brief Closes the logging class.
      */

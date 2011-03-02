@@ -27,7 +27,8 @@ int main(int argc,char *argv[])
 {
     Log log;
     log.init();
-    cout << "Hello, world!\n" <<endl;
+	log.write(LOG_INFO)<<"Hello, log!"<<endl;
+    cout << "Hello, world!\n" << endl;
 
     log.close();
 }

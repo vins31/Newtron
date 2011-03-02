@@ -1,5 +1,5 @@
 # output executable name
-EXEC = test
+EXEC = client
 # source files
 CXX = g++
 CXXFLAGS = -W -Wall -Iinc/
@@ -17,3 +17,6 @@ $(EXEC) : $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
+	
+doc: src/*.cpp inc/*.h
+	doxygen
