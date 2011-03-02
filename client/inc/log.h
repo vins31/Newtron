@@ -27,6 +27,13 @@
  * Logging class file (will be used everywhere in Newtron to log stuff).
  */
 
+/* Example : 
+ Log log;
+ log.init();
+ log.write(LOG_3D)<<"Ogre initialisation"<<endl;
+ log.close();
+*/
+
 #include <iostream>
 #include <string>
 #include <fstream>

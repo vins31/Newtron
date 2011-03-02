@@ -23,12 +23,11 @@
 
 using namespace std;
 
-int main()
+int main(int argc,char *argv[])
 {
-    cout << "Hello, world!\n" <<endl;
     Log log;
     log.init();
-    log.write(LOG_NORMAL)<<"salut"<<endl;
-    log.write(LOG_3D)<<"3D init fail"<<endl;
+    cout << "Hello, world!\n" <<endl;
+
     log.close();
 }
