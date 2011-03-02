@@ -26,4 +26,9 @@ using namespace std;
 int main()
 {
     cout << "Hello, world!\n" <<endl;
+    Log log;
+    log.init();
+    log.write(LOG_NORMAL)<<"salut"<<endl;
+    log.write(LOG_3D)<<"3D init fail"<<endl;
+    log.close();
 }

@@ -38,9 +38,7 @@ public:
     Log();
     ~Log();
     void init(string file_path=DEFAULT_LOG_PATH);
-    void set_log_type(Log_Type type);
-    void operator<<(ostream &o);
-    void write(string str,Log_Type type=LOG_NORMAL);
+    fstream &write(Log_Type type=LOG_NORMAL);
     void close();
 private:
     string logtype_to_prefix(Log_Type type);

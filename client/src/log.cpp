@@ -26,7 +26,7 @@ Log::Log() : m_log_type(LOG_NORMAL)
 
 Log::~Log() {
     if(m_file) {
-        write("Log file has not been closed properly during execution!");
+        write(LOG_NORMAL);
         m_file.close();
     }
 }
@@ -39,17 +39,14 @@ void Log::init(string file_path) {
     }
 }
 
-void Log::write(string str,Log_Type type) {
-    m_file<<logtype_to_prefix(type)<<" : "<<str<<endl;
-}
-
-void Log::operator<<(ostream& out) {
-    m_file<<out;
+fstream &Log::write(Log_Type type) {
+    m_file<<logtype_to_prefix(type);
+    return m_file;
 }
 
 void Log::close() {
     if(m_file) {
-        write("Closing log file");
+        write()<<"Closing log file"<<endl;
         m_file.close();
     }
 }
@@ -72,5 +69,3 @@ string Log::logtype_to_prefix(Log_Type type) {
     }
     return prefix;
 }
-
-
