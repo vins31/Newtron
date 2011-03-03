@@ -5,6 +5,7 @@ CXX = g++
 CXXFLAGS = -W -Wall -Iinc/
 LDFLAGS = 
 SRCS = $(wildcard src/*.cpp)
+INCS = $(wildcard inc/*.h)
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(EXEC)
@@ -15,8 +16,8 @@ $(EXEC) : $(OBJS)
 %.o : %.cpp
 	$(CXX) -o $@ -c $< $(CXXFLAGS)
 
-clean:
+clean :
 	rm -rf $(OBJS)
 	
-doc: src/*.cpp inc/*.h
+doc : $(SRCS) $(INCS)
 	doxygen
