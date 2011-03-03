@@ -20,4 +20,4 @@ clean :
 	rm -rf $(OBJS)
 	
 doc : $(SRCS) $(INCS)
-	doxygen
+	doxygen doc/Doxyfile
