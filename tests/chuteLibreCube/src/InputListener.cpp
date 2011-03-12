@@ -21,7 +21,7 @@ InputListener::InputListener(Application* app, RenderWindow* win, Camera* cam, S
 // but before render windows have been asked to flip their buffers over
 bool InputListener::frameRenderingQueued(const FrameEvent& evt)
 {
-	// gestion des entrées clavier et souris
+	// gestion des entrÃ©es clavier et souris
     if(mMouse)
         mMouse->capture();
     if(mKeyboard)
@@ -37,7 +37,7 @@ bool InputListener::frameRenderingQueued(const FrameEvent& evt)
 // Called just after a frame has been rendered
 bool InputListener::frameEnded(const FrameEvent &evt)
 {
-	// mise à jour du monde physique et répercution sur le monde graphique
+	// mise Ã  jour du monde physique et rÃ©percution sur le monde graphique
 	application->gererPhysique();
 
 	return mContinuer;

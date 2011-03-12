@@ -7,7 +7,7 @@ void Application::createScene()
 
 	SceneNode *node= mSceneMgr->getRootSceneNode()->createChildSceneNode("nodeTete", Vector3::ZERO, Quaternion::IDENTITY);
 
-	// tête
+	// tÃªte
 	//Entity *head= mSceneMgr->createEntity("Tete", "ogrehead.mesh");
 	//node->attachObject(head);
 
@@ -18,12 +18,12 @@ void Application::createScene()
 	node->attachObject(ent);
 	ent->setMaterialName("Examples/GrassFloor");
 
-	// boîte en chute libre
+	// boÃ®te en chute libre
 	Entity *box= mSceneMgr->createEntity("Box", "cube.mesh"); // 100x100x100 cube
 	SceneNode *nodeBox= mSceneMgr->getRootSceneNode()->createChildSceneNode("nodeBox");
 	nodeBox->attachObject(box);
 
-	// lumière directionnelle
+	// lumiÃ¨re directionnelle
 	mSceneMgr->setAmbientLight(ColourValue(0.0, 0.0, 0.0));
 	Light *light = mSceneMgr->createLight("lumiere1");
 	light->setDiffuseColour(1.0, 0.7, 1.0);
@@ -42,7 +42,7 @@ void Application::createScene()
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 }
 
-void Application::createCamera() // appelée automatiquement
+void Application::createCamera() // appelÃ©e automatiquement
 {
 	mCamera = mSceneMgr->createCamera("Ma Camera");
 	mCamera->setPosition(Vector3(-350.0, 500.0, 500.0));
@@ -53,14 +53,14 @@ void Application::createCamera() // appelée automatiquement
 		mCamera->setFarClipDistance(0);
 }
 
-void Application::createViewports() // appelée automatiquement
+void Application::createViewports() // appelÃ©e automatiquement
 {
 	Viewport *vue = mWindow->addViewport(mCamera);
 	mCamera->setAspectRatio(Real(vue->getActualWidth()) / Real(vue->getActualHeight()));
 	vue->setBackgroundColour(ColourValue(0.8, 0.8, 0.8));
 }
 
-void Application::createFrameListener() // appelée automatiquement
+void Application::createFrameListener() // appelÃ©e automatiquement
 {
 	mFrameListener= new InputListener(this, mWindow, mCamera, mSceneMgr, true, true, false);
     mRoot->addFrameListener(mFrameListener);
@@ -68,32 +68,32 @@ void Application::createFrameListener() // appelée automatiquement
 
 void Application::createBulletWorld()
 {
-	// configuration par défaut pour la mémoire, la collision
+	// configuration par dÃ©faut pour la mÃ©moire, la collision
 	myCollisionConfiguration = new btDefaultCollisionConfiguration(); 
 
-	// collision dispatcher par défaut (parallèle : cf. Extras/BulletMultiThreaded)
+	// collision dispatcher par dÃ©faut (parallÃ¨le : cf. Extras/BulletMultiThreaded)
 	myDispatcher = new btCollisionDispatcher(myCollisionConfiguration); 
 
-	// initialisation du broadphase (détecteur des objets où leurs AABB se chevauchent) 
+	// initialisation du broadphase (dÃ©tecteur des objets oÃ¹ leurs AABB se chevauchent) 
 	myBroadphase = new btDbvtBroadphase();
 
-	// constraint solver par défaut (parallèle : cf. Extras/BulletMultiThreaded)
+	// constraint solver par dÃ©faut (parallÃ¨le : cf. Extras/BulletMultiThreaded)
 	mySequentialImpulseConstraintSolver = new btSequentialImpulseConstraintSolver; 
 
 	// initialisation du monde physique Bullet
 	myWorld = new btDiscreteDynamicsWorld(myDispatcher,myBroadphase,mySequentialImpulseConstraintSolver,myCollisionConfiguration);
 
-	// définition de la gravité
+	// dÃ©finition de la gravitÃ©
 	myWorld->setGravity( btVector3(0,-10,0) ); 
 
-	// création des éléments physiques
+	// crÃ©ation des Ã©lÃ©ments physiques
 	createBulletBox();
 	createBulletSol();
 }
 
 void Application::createBulletBox()
 {
-	// On déclare une forme et on l'initialise en tant que boite de la taille 1,1,1 
+	// On dÃ©clare une forme et on l'initialise en tant que boite de la taille 1,1,1 
 	btCollisionShape* shape = new btBoxShape( btVector3(50,50,50) );
 
 	// On initialise notre btTransform et on lui dit une position (la position de la boite) 
@@ -111,13 +111,13 @@ void Application::createBulletBox()
 	if ( mass )
 		shape->calculateLocalInertia( mass, localInertia );
 
-	// Il est conseillé d'utiliser motionState car il fournit des capacités d'interpolation et synchronise seulement les objets "actifs". 
+	// Il est conseillÃ© d'utiliser motionState car il fournit des capacitÃ©s d'interpolation et synchronise seulement les objets "actifs". 
 	myMotionState_Box = new btDefaultMotionState(myTransform);
 
-	// On regroupe les informations de la boite à partir de la masse, l'inertie, etc ...
+	// On regroupe les informations de la boite Ã  partir de la masse, l'inertie, etc ...
 	btRigidBody::btRigidBodyConstructionInfo myBoxRigidBodyConstructionInfo( mass, myMotionState_Box, shape, localInertia );
 
-	// On construit le corps de la boite à partir de l'information regroupée 
+	// On construit le corps de la boite Ã  partir de l'information regroupÃ©e 
 	body_box = new btRigidBody(myBoxRigidBodyConstructionInfo);
 
 	// On ajoute notre boite dans le monde Bullet 
@@ -134,7 +134,7 @@ void Application::createBulletSol()
 	myTransform.setOrigin( btVector3(0,-1,0) );
 	btVector3 localInertiaSol(0,0,0);
 
-	btScalar mass = 0; // Le fait que le poids de cet objet soit zéro le rend statique
+	btScalar mass = 0; // Le fait que le poids de cet objet soit zÃ©ro le rend statique
 
 	myMotionState_Sol = new btDefaultMotionState(myTransform);
 

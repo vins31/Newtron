@@ -1,13 +1,13 @@
 /**
- *  Test d'intégration Bullet-Ogre-OIS
+ *  Test d'intÃ©gration Bullet-Ogre-OIS
  *  ----------------------------------
  *
  *	compilation :
- *		dépendances : OGRE (OIS, boost), bullet
+ *		dÃ©pendances : OGRE (OIS, boost), bullet
  *	
  *	utilisation :
- *		Q,S,D,Z : déplacement caméra
- *		souris : orientation caméra
+ *		Q,S,D,Z : dÃ©placement camÃ©ra
+ *		souris : orientation camÃ©ra
  *		espace : reset cube		 
  */
 

@@ -18,14 +18,14 @@ public:
 	void reset();
 private:
 	btDiscreteDynamicsWorld *myWorld; // monde physique
-	btBroadphaseInterface *myBroadphase; // détection de chevauchement AABB d'objets
+	btBroadphaseInterface *myBroadphase; // dÃ©tection de chevauchement AABB d'objets
 	btCollisionDispatcher *myDispatcher; // algorithmes de gestion de collisions
-	btDefaultCollisionConfiguration *myCollisionConfiguration; // configuration des allocataires de mémoires
-	btSequentialImpulseConstraintSolver *mySequentialImpulseConstraintSolver; // implémentation SIMD rapide de la méthode Projected Gauss Seidel (iterative LCP)
+	btDefaultCollisionConfiguration *myCollisionConfiguration; // configuration des allocataires de mÃ©moires
+	btSequentialImpulseConstraintSolver *mySequentialImpulseConstraintSolver; // implÃ©mentation SIMD rapide de la mÃ©thode Projected Gauss Seidel (iterative LCP)
 	btTransform myTransform; // position ou orientation
 	btDefaultMotionState *myMotionState_Box; // synchronisation des transformations
 	btDefaultMotionState *myMotionState_Sol; // synchronisation des transformations 
-	btRigidBody *body_box; // boîte en chute libre
+	btRigidBody *body_box; // boÃ®te en chute libre
 	btRigidBody	*body_sol; // sol
 };
 
