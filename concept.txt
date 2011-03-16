@@ -1,0 +1,16 @@
+
+  |                      client 1                         |                 |            |               |                      client 2                         |
+  |-------------------------------------------------------|                 |   server   |               |-------------------------------------------------------|
+  |      thread 1     |     thread 2    |     thread 3    |                 |            |               |      thread 1     |     thread 2    |     thread 3    |
+  |      display      |      events     |     network     |                 |            |               |      display      |      events     |     network     |
+
+                              key                                                                                                    key
+                               |                                TCP                              TCP                                  |
+    step bullet   <-----------/ \--------->   send stack   -------------->   step bullet   <-----------------  send stack <----------/ \----------> step bullet
+ (player 1 motion)                                             action       (all motions)       action                                           (player 2 motion)
+                                                                            (collisions)
+        OGRE                                                                      |                                                                    OGRE
+                                                                     UDP          |             UDP
+    calcul correctif  <------------------- receive stack   <---------------------/ \------------------------> receive stack -------------------> calcul correctif
+                                                                all positions             all positions
+   correction bullet                                                                                                                             correction bullet
