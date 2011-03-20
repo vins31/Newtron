@@ -1,7 +1,7 @@
 #include "InputListener.h"
 
 InputListener::InputListener(Application* app, RenderWindow* win, Camera* cam, SceneManager *sceneMgr, 
-								bool bufferedKeys, bool bufferedMouse, bool bufferedJoy) 
+                             bool bufferedKeys, bool bufferedMouse, bool bufferedJoy) 
    : ExampleFrameListener(win, cam, bufferedKeys, bufferedMouse, bufferedJoy)
 {
     mSceneMgr = sceneMgr;
@@ -14,14 +14,14 @@ InputListener::InputListener(Application* app, RenderWindow* win, Camera* cam, S
     mMouse->setEventCallback(this);
     mKeyboard->setEventCallback(this);
 
-	application = app;
+    application = app;
 }
 
 // Called after all render targets have had their rendering commands issued, 
 // but before render windows have been asked to flip their buffers over
 bool InputListener::frameRenderingQueued(const FrameEvent& evt)
 {
-	// gestion des entrées clavier et souris
+    // gestion des entrées clavier et souris
     if(mMouse)
         mMouse->capture();
     if(mKeyboard)
@@ -37,10 +37,10 @@ bool InputListener::frameRenderingQueued(const FrameEvent& evt)
 // Called just after a frame has been rendered
 bool InputListener::frameEnded(const FrameEvent &evt)
 {
-	// mise à jour du monde physique et répercution sur le monde graphique
-	application->gererPhysique();
+    // mise à jour du monde physique et répercution sur le monde graphique
+    application->gererPhysique();
 
-	return mContinuer;
+    return mContinuer;
 }
 
 bool InputListener::mouseMoved(const OIS::MouseEvent &e)
