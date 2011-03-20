@@ -85,6 +85,8 @@ bool InputListener::keyPressed(const OIS::KeyEvent &e)
 	case OIS::KC_SPACE:
 		application->reset();
 		break;
+	default:
+		break;
     }
 
     return mContinuer;
@@ -109,6 +111,8 @@ bool InputListener::keyReleased(const OIS::KeyEvent &e)
     case OIS::KC_LSHIFT:
         mVitesse /= 2;
         break;
+    default:
+		break;
     }
     return true;
 }

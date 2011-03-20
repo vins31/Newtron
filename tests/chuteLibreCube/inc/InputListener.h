@@ -5,7 +5,7 @@
 #include <ExampleFrameListener.h>
 #include "Application.h"
 
-class InputListener : public ExampleFrameListener, OIS::KeyListener, OIS::MouseListener
+class InputListener : public ExampleFrameListener, OIS::KeyListener, OIS::MouseListener // FrameTimeControllerValue
 {
 public:
     InputListener(Application* app, RenderWindow* win, Camera* cam, SceneManager *sceneMgr, bool bufferedKeys = false, 
