@@ -47,7 +47,7 @@ void Application::createScene()
     pivotA->setCastShadows(true);
     pivotB->setCastShadows(true);
 
-    mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+    mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE); // SHADOWTYPE_STENCIL_MODULATIVE
 }
 
 void Application::createCamera() // appelée automatiquement

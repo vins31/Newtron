@@ -6,7 +6,7 @@
  *        dépendances : OGRE (OIS, boost), bullet
  *    
  *    utilisation :
- *        Q,S,D,Z : déplacement caméra
+ *        Q,S,D,Z,A,E : déplacement caméra
  *        souris : orientation caméra
  *        espace : reset         
  */

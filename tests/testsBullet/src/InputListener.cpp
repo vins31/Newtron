@@ -79,14 +79,20 @@ bool InputListener::keyPressed(const OIS::KeyEvent &e)
     case OIS::KC_D:
         mMouvement.x += 1;
         break;
+    case OIS::KC_Q:
+        mMouvement.y -= 1;
+        break;
+    case OIS::KC_E:
+        mMouvement.y += 1;
+        break;
     case OIS::KC_LSHIFT:
         mVitesse *= 2;
         break;
-	case OIS::KC_SPACE:
-		application->reset();
-		break;
-	default:
-		break;
+    case OIS::KC_SPACE:
+        application->reset();
+        break;
+    default:
+        break;
     }
 
     return mContinuer;
@@ -108,11 +114,18 @@ bool InputListener::keyReleased(const OIS::KeyEvent &e)
     case OIS::KC_D:
         mMouvement.x -= 1;
         break;
+    case OIS::KC_Q:
+        mMouvement.y += 1;
+        break;
+    case OIS::KC_E:
+        mMouvement.y -= 1;
+        break;
     case OIS::KC_LSHIFT:
         mVitesse /= 2;
         break;
     default:
-		break;
+        break;
     }
+
     return true;
 }
