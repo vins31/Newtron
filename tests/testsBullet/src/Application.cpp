@@ -1,3 +1,5 @@
+#include "btBulletWorldImporter.h"
+
 #include "Application.h"
 #include "InputListener.h"
 
@@ -29,6 +31,13 @@ void Application::createScene()
     SceneNode *nodePivotB= mSceneMgr->getRootSceneNode()->createChildSceneNode("nodePivotB");
     nodePivotB->scale(1.0, 0.5, 0.5); // 100x50x50 cube
     nodePivotB->attachObject(pivotB);
+
+    // pneu
+    Entity *pneu = mSceneMgr->createEntity("Pneu", "wheel.mesh"); // pneu de 1 de diamètre
+    SceneNode *nodePneu = mSceneMgr->getRootSceneNode()->createChildSceneNode("nodePneu");
+    nodePneu->attachObject(pneu);
+    nodePneu->scale(100, 100, 100); // pneu de 100 de diamètre
+    nodePneu->setPosition(0,200,0);
 
     // lumière directionnelle
     mSceneMgr->setAmbientLight(ColourValue(0.0, 0.0, 0.0));
@@ -99,12 +108,15 @@ void Application::createBulletWorld()
     createBulletSol();
     createBulletPivotA();
     createBulletPivotB();
+    createBulletPneu();
 
     // liaison pivot entre A et B
     pivotAB = new btHingeConstraint(*body_pivotA,          *body_pivotB, 
                                     btVector3(50, -25, 0), btVector3(-50, -25, 0),
                                     btVector3(0, 0, 1),    btVector3(0, 0, 1));
     myWorld->addConstraint(pivotAB, false);
+    //pivotAB->enableAngularMotor(true, 20, 40);  
+    //myWorld->addConstraint(pivotAB, true);
                                     
 }
 
@@ -198,16 +210,47 @@ void Application::createBulletSol()
     myWorld->addRigidBody(body_sol); 
 }
 
+void Application::createBulletPneu()
+{
+    btBulletWorldImporter* fileLoader = new btBulletWorldImporter(myWorld);
+ 
+    // optionally enable the verbose mode to provide debugging information during file loading 
+    // (a lot of data is generated, so this option is very slow)
+    fileLoader->setVerboseMode(true);
+ 
+    //body_pneu = fileLoader->getRigidBodyByName("wheel");
+    fileLoader->loadFile("wheel.bullet");
+
+    int body_count = fileLoader->getNumRigidBodies();
+    std::cout << "fileLoader->getNumRigidBodies() = " << body_count << std::endl;
+
+    // ----------
+
+    btBulletWorldImporter import(0); //don't store info into the world
+    if (import.loadFile("wheel.bullet"))
+    {
+        int numBvh = import.getNumBvhs();
+        if (numBvh)
+        {
+            btOptimizedBvh* bvh = import.getBvhByIndex(0);
+        }
+    }
+}
+
 void Application::gererPhysique()
 {
+    float ms = getDeltaTimeMicroseconds();
+
     if ( myWorld )
-        myWorld->stepSimulation( 1.0 / 60.0 );
+        myWorld->stepSimulation(ms / 1000000.f);
+    //  myWorld->stepSimulation( 1.0 / 60.0 );
     //  myWorld->stepSimulation( Ogre::ControllerManager::getElapsedTime() );
 
     syncBulletToOgre(body_box, "nodeBox");
     syncBulletToOgre(body_sol, "nodeSol");
     syncBulletToOgre(body_pivotA, "nodePivotA");
     syncBulletToOgre(body_pivotB, "nodePivotB");
+    //syncBulletToOgre(body_pneu, "nodePneu");
 }
 
 void Application::reset()
@@ -238,4 +281,11 @@ void Application::syncBulletToOgre(btRigidBody *rigidBody, const Ogre::String no
                                                       rigidBody->getCenterOfMassTransform().getRotation().normalize().getX(),
                                                       rigidBody->getCenterOfMassTransform().getRotation().normalize().getY(),
                                                       rigidBody->getCenterOfMassTransform().getRotation().normalize().getZ());
+}
+
+btScalar Application::getDeltaTimeMicroseconds()
+{
+    btScalar dt = (btScalar)m_clock.getTimeMicroseconds();
+    m_clock.reset();
+    return dt;
 }
