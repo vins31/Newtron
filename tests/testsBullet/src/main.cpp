@@ -48,8 +48,6 @@ int main(int argc, char **argv)
 {
     Application app;
 
-    std::cout << "test" << std::endl;
-
     try 
     {
         app.go();

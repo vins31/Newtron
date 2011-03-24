@@ -114,10 +114,10 @@ void Application::createBulletWorld()
     pivotAB = new btHingeConstraint(*body_pivotA,          *body_pivotB, 
                                     btVector3(50, -25, 0), btVector3(-50, -25, 0),
                                     btVector3(0, 0, 1),    btVector3(0, 0, 1));
+
     myWorld->addConstraint(pivotAB, false);
     //pivotAB->enableAngularMotor(true, 20, 40);  
     //myWorld->addConstraint(pivotAB, true);
-                                    
 }
 
 void Application::createBulletBox()
